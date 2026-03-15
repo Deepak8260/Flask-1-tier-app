@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flask Tips · DevAtlas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <a href="{{ url_for('index') }}" class="logo">
+        <div class="logo-icon">⬡</div>
+        DevAtlas
+      </a>
+      <div class="nav-pills">
+        <a href="{{ url_for('linux') }}"      class="nav-pill">Linux</a>
+        <a href="{{ url_for('git') }}"        class="nav-pill">Git</a>
+        <a href="{{ url_for('docker') }}"     class="nav-pill">Docker</a>
+        <a href="{{ url_for('python') }}"     class="nav-pill">Python</a>
+        <a href="{{ url_for('flask_tips') }}" class="nav-pill active">Flask</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container page-header-inner">
+      <div>
+        <div class="page-icon flask">⚗️</div>
+        <h1 class="page-title">Flask Tips</h1>
+        <p class="page-intro">
+          Production patterns, app architecture, request handling, Jinja2 tricks,
+          and everything in between for building clean, maintainable Flask applications.
+        </p>
+      </div>
+      <a href="{{ url_for('index') }}" class="back-btn">← Back to Hub</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="section-heading">
+        <h2>{{ commands | length }} Tips</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="cmd-grid">
+        {% for cmd in commands %}
+        <div class="cmd-card">
+          <span class="cmd-name">{{ cmd.name }}</span>
+          <p class="cmd-desc">{{ cmd.desc }}</p>
+          <div class="cmd-example-wrap">
+            <div class="cmd-example-label">Example</div>
+            <pre class="cmd-example">{{ cmd.example }}</pre>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-copy">// DevAtlas · Flask Tips Reference</span>
+      <div class="footer-links">
+        <a href="{{ url_for('index') }}"  class="footer-link">Home</a>
+        <a href="{{ url_for('linux') }}"  class="footer-link">Linux</a>
+        <a href="{{ url_for('git') }}"    class="footer-link">Git</a>
+        <a href="{{ url_for('docker') }}" class="footer-link">Docker</a>
+        <a href="{{ url_for('python') }}" class="footer-link">Python</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
