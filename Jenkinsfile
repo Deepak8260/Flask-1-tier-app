@@ -7,6 +7,12 @@ pipeline{
                 echo "Git Clone Ho gaya successfully"
             }
         }
+        stage("cleanup old image"){
+            steps{
+                sh "docker rmi flask-app:latest || true"
+                sh "docker rmi kumar3472/flask-single-tier:latest || true"
+            }
+        }
         stage("build"){
             steps{
                 sh "docker build -t flask-app:latest ."
