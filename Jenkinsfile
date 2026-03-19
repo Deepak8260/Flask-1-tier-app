@@ -9,8 +9,8 @@ pipeline{
         }
         stage("cleanup old image"){
             steps{
-                sh "docker rmi flask-app:latest || true"
-                sh "docker rmi kumar3472/flask-single-tier:latest || true"
+                sh "docker rmi -f flask-app:latest || true"
+                sh "docker rmi -f kumar3472/flask-single-tier:latest || true"
             }
         }
         stage("build"){
@@ -37,9 +37,27 @@ pipeline{
         stage("deploy"){
             steps{
                 sh "docker stop my-flask-app || true"
-                sh "docker rm my-flask-app || true"
+                sh "docker rm -f my-flask-app || true"
                 sh "docker run -d -p 5000:5000 --name my-flask-app flask-app:latest"
                 echo "deploy ho gaya"
+            }
+        }
+    }
+post{
+        success{
+            script{
+                emailext from: 'kd8260@gmail.com',
+                to: 'kd.codegeek@gmail.com',
+                body: 'Build success for Demo CICD App',
+                subject: 'Build success for Demo CICD App'
+            }
+        }
+        failure{
+            script{
+                emailext from: 'kd8260@gmail.com',
+                to: 'kd.codegeek@gmail.com',
+                body: 'Build Failed for Demo CICD App',
+                subject: 'Build Failed for Demo CICD App'
             }
         }
     }
